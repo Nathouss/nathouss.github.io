@@ -1,0 +1,3 @@
+.stripes {
+	background: repeating-radial-gradient( circle at bottom right, #eee, #ccc 50px );
+}
