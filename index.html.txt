@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello World</h1>
+<p>I'm hosted with GitHub Pages.</p>
+<h3>Je Galère XD </h3>
+<h2>Mais c'est <strong>marant<strong>! </h2>
+</body>
+</html>
