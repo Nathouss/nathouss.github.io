@@ -1,12 +1,9 @@
 .center-buttons {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    z-index: 1000 !important;
-    display: flex !important;
-    gap: 1em !important;
-    width: auto !important;
-    justify-content: center !important;
-    align-items: center !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    gap: 1em;
 }
