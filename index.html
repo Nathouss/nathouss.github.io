@@ -52,6 +52,7 @@ btnStop.addEventListener('click', function() {
     tracking = false;
     btnStart.style.display = 'inline';
     btnStop.style.display = 'none';
+    // Ne change rien à currentX/currentY : le cercle reste où il est
 });
 
 // Animation lissée
@@ -60,17 +61,12 @@ function animate() {
         // Mouvement lent (0.05 = très smooth)
         currentX += (targetX - currentX) * 0.05;
         currentY += (targetY - currentY) * 0.05;
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const xPercent = (currentX / width) * 100;
-        const yPercent = (currentY / height) * 100;
-        document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
-    } else {
-        // Quand inactif, cercle reste en bas à droite
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        document.body.style.background = `repeating-radial-gradient(circle at 100% 100%, #eee, #ccc 50px)`;
     }
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const xPercent = (currentX / width) * 100;
+    const yPercent = (currentY / height) * 100;
+    document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
     requestAnimationFrame(animate);
 }
 animate();
