@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cercles {
+  background: repeating-radial-gradient(circle at 100% 100%, #eee, #ccc 50px);
+}
