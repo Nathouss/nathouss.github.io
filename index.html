@@ -8,58 +8,14 @@
     <title></title>
 </head>
 <body>
-<div class="center-buttons">
-  <button id="start-gradient">Activer le suivi du cercle</button>
-  <button id="stop-gradient" style="display:none;">Arrêter le suivi</button>
-</div>
+    
+  <div class="center-buttons">
+    <button id="start-gradient">Activer le suivi du cercle</button>
+    <button id="stop-gradient" style="display:none;">Arrêter le suivi</button>
+  </div>
 
 <script src="JAVASCRIPT/index.js"></script>
 
-<script>
-const btnStart = document.getElementById('start-gradient');
-const btnStop = document.getElementById('stop-gradient');
-let tracking = false;
 
-// Position du coin bas droit au départ
-let currentX = window.innerWidth;
-let currentY = window.innerHeight;
-
-// Cible (souris)
-let targetX = currentX;
-let targetY = currentY;
-
-// Dernière position connue de la souris
-let lastMouseX = currentX;
-let lastMouseY = currentY;
-
-document.addEventListener('mousemove', function(e) {
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
-    if (tracking) {
-        targetX = lastMouseX;
-        targetY = lastMouseY;
-    }
-});
-
-btnStart.addEventListener('click', function() {
-    tracking = true;
-    btnStart.style.display = 'none';
-    btnStop.style.display = 'inline';
-    // La cible devient la souris, mais currentX/Y restent en bas à droite
-    targetX = lastMouseX;
-    targetY = lastMouseY;
-});
-
-btnStop.addEventListener('click', function() {
-    tracking = false;
-    btnStart.style.display = 'inline';
-    btnStop.style.display = 'none';
-    // Ne change rien à currentX/currentY : le cercle reste où il est
-});
-
-// Animation lissée
-
-animate();
-</script>
 </body>
 </html>
