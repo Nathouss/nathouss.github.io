@@ -14,10 +14,21 @@ body {
     gap: 20px;
 }
 
-.center-buttons {
-    position: relative;
-    width: 100%;
+body {
+    margin: 0;
+    padding: 0;
     height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+.center-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 button {
@@ -29,7 +40,8 @@ button {
     background: linear-gradient(45deg, #666, #999);
     color: white;
     transition: transform 0.2s;
-    position: absolute;
+    position: fixed;
+    z-index: 1000;
 }
 
 button:hover {
@@ -41,6 +53,8 @@ button:active {
 }
 
 #par-ici-btn {
-    position: absolute;
-    z-index: 10;
+    position: fixed;
+    z-index: 1000;
+    display: none;
+    pointer-events: none;
 }

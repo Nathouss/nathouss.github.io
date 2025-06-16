@@ -16,14 +16,24 @@ class MouseTracker {
 
     // Helper function to get random position
     getRandomPosition() {
+        // Force the button to render to get its dimensions
+        this.parIciButton.style.display = 'block';
+        this.parIciButton.style.position = 'fixed';
+        
+        // Get dimensions
         const buttonWidth = this.parIciButton.offsetWidth;
         const buttonHeight = this.parIciButton.offsetHeight;
         
+        // Calculate max positions
         const maxX = window.innerWidth - buttonWidth;
         const maxY = window.innerHeight - buttonHeight;
         
+        // Generate random coordinates
         const randomX = Math.floor(Math.random() * maxX);
         const randomY = Math.floor(Math.random() * maxY);
+        
+        // Hide the button again
+        this.parIciButton.style.display = 'none';
         
         return { x: randomX, y: randomY };
     }
@@ -47,10 +57,19 @@ class MouseTracker {
                 
                 // Show PAR ICI button after 5 seconds
                 setTimeout(() => {
+                    // Get random position first
                     const position = this.getRandomPosition();
-                    this.parIciButton.style.display = 'inline-block';
+                    
+                    // Show button with position
+                    this.parIciButton.style.display = 'block';
+                    this.parIciButton.style.position = 'fixed';
                     this.parIciButton.style.left = `${position.x}px`;
                     this.parIciButton.style.top = `${position.y}px`;
+                    
+                    // Add pointer events back after a short delay
+                    setTimeout(() => {
+                        this.parIciButton.style.pointerEvents = 'auto';
+                    }, 100);
                 }, 5000);
             });
 
