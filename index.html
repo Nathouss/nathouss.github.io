@@ -13,6 +13,8 @@
   <button id="stop-gradient" style="display:none;">Arrêter le suivi</button>
 </div>
 
+<script src="JAVASCRIPT/index.js"></script>
+
 <script>
 const btnStart = document.getElementById('start-gradient');
 const btnStop = document.getElementById('stop-gradient');
@@ -56,19 +58,7 @@ btnStop.addEventListener('click', function() {
 });
 
 // Animation lissée
-function animate() {
-    if (tracking) {
-        // Mouvement lent (0.05 = très smooth)
-        currentX += (targetX - currentX) * 0.05;
-        currentY += (targetY - currentY) * 0.05;
-    }
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const xPercent = (currentX / width) * 100;
-    const yPercent = (currentY / height) * 100;
-    document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
-    requestAnimationFrame(animate);
-}
+
 animate();
 </script>
 </body>
