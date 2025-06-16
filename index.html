@@ -18,23 +18,34 @@ const btnStart = document.getElementById('start-gradient');
 const btnStop = document.getElementById('stop-gradient');
 let tracking = false;
 
-// Position cible (souris) et position actuelle (cercle)
-let targetX = window.innerWidth / 2;
-let targetY = window.innerHeight / 2;
-let currentX = targetX;
-let currentY = targetY;
+// Position du coin bas droit au départ
+let currentX = window.innerWidth;
+let currentY = window.innerHeight;
 
-// Met à jour la cible quand la souris bouge
+// Cible (souris)
+let targetX = currentX;
+let targetY = currentY;
+
+// Dernière position connue de la souris
+let lastMouseX = currentX;
+let lastMouseY = currentY;
+
 document.addEventListener('mousemove', function(e) {
-    if (!tracking) return;
-    targetX = e.clientX;
-    targetY = e.clientY;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    if (tracking) {
+        targetX = lastMouseX;
+        targetY = lastMouseY;
+    }
 });
 
 btnStart.addEventListener('click', function() {
     tracking = true;
     btnStart.style.display = 'none';
     btnStop.style.display = 'inline';
+    // La cible devient la souris, mais currentX/Y restent en bas à droite
+    targetX = lastMouseX;
+    targetY = lastMouseY;
 });
 
 btnStop.addEventListener('click', function() {
@@ -46,14 +57,19 @@ btnStop.addEventListener('click', function() {
 // Animation lissée
 function animate() {
     if (tracking) {
-        // Interpolation linéaire (lerp)
-        currentX += (targetX - currentX) * 0.1;
-        currentY += (targetY - currentY) * 0.1;
+        // Mouvement lent (0.05 = très smooth)
+        currentX += (targetX - currentX) * 0.05;
+        currentY += (targetY - currentY) * 0.05;
         const width = window.innerWidth;
         const height = window.innerHeight;
         const xPercent = (currentX / width) * 100;
         const yPercent = (currentY / height) * 100;
         document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
+    } else {
+        // Quand inactif, cercle reste en bas à droite
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        document.body.style.background = `repeating-radial-gradient(circle at 100% 100%, #eee, #ccc 50px)`;
     }
     requestAnimationFrame(animate);
 }
