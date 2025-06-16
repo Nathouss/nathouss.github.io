@@ -7,5 +7,37 @@
     <title></title>
 </head>
 <body>
+
+ <button id="start-gradient">Activer le suivi du cercle</button>
+ <button id="stop-gradient" style="display:none;">Arrêter le suivi</button>
+
+<script>
+const btnStart = document.getElementById('start-gradient');
+const btnStop = document.getElementById('stop-gradient');
+let tracking = false;
+
+btnStart.addEventListener('click', function() {
+    tracking = true;
+    btnStart.style.display = 'none';
+    btnStop.style.display = 'inline';
+});
+
+btnStop.addEventListener('click', function() {
+    tracking = false;
+    btnStart.style.display = 'inline';
+    btnStop.style.display = 'none';
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (!tracking) return;
+    const x = e.clientX;
+    const y = e.clientY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const xPercent = (x / width) * 100;
+    const yPercent = (y / height) * 100;
+    document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
+});
+</script>
 </body>
 </html>
