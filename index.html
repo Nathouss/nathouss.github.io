@@ -3,11 +3,11 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="CSS/cercles.css" />
+    <link rel="stylesheet" href="CSS/boutons.css" />
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
-<link rel="stylesheet" href="CSS/boutons.css" />
 <div class="center-buttons">
   <button id="start-gradient">Activer le suivi du cercle</button>
   <button id="stop-gradient" style="display:none;">Arrêter le suivi</button>
@@ -17,6 +17,19 @@
 const btnStart = document.getElementById('start-gradient');
 const btnStop = document.getElementById('stop-gradient');
 let tracking = false;
+
+// Position cible (souris) et position actuelle (cercle)
+let targetX = window.innerWidth / 2;
+let targetY = window.innerHeight / 2;
+let currentX = targetX;
+let currentY = targetY;
+
+// Met à jour la cible quand la souris bouge
+document.addEventListener('mousemove', function(e) {
+    if (!tracking) return;
+    targetX = e.clientX;
+    targetY = e.clientY;
+});
 
 btnStart.addEventListener('click', function() {
     tracking = true;
@@ -30,16 +43,21 @@ btnStop.addEventListener('click', function() {
     btnStop.style.display = 'none';
 });
 
-document.addEventListener('mousemove', function(e) {
-    if (!tracking) return;
-    const x = e.clientX;
-    const y = e.clientY;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const xPercent = (x / width) * 100;
-    const yPercent = (y / height) * 100;
-    document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
-});
+// Animation lissée
+function animate() {
+    if (tracking) {
+        // Interpolation linéaire (lerp)
+        currentX += (targetX - currentX) * 0.1;
+        currentY += (targetY - currentY) * 0.1;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const xPercent = (currentX / width) * 100;
+        const yPercent = (currentY / height) * 100;
+        document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
+    }
+    requestAnimationFrame(animate);
+}
+animate();
 </script>
 </body>
 </html>
