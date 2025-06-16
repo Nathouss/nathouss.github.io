@@ -1,5 +1,4 @@
 const btnStart = document.getElementById('start-gradient');
-const btnPlay = document.getElementById('play-btn');
 let tracking = false;
 
 // Position du coin bas droit au départ
@@ -26,17 +25,8 @@ document.addEventListener('mousemove', function(e) {
 btnStart.addEventListener('click', function() {
     tracking = true;
     btnStart.style.display = 'none';
-    btnPlay.style.display = 'inline'; // Affiche le bouton JOUER
     targetX = lastMouseX;
     targetY = lastMouseY;
-});
-
-btnPlay.addEventListener('click', function() {
-    btnPlay.style.display = 'none';
-    // Charger dynamiquement play.js
-    const playScript = document.createElement('script');
-    playScript.src = 'JAVASCRIPT/play.js';
-    document.body.appendChild(playScript);
 });
 
 // Animation lissée
