@@ -4,7 +4,21 @@ html, body {
     padding: 0;
     box-sizing: border-box;
 }
-.cercles{
-    
-	background: repeating-radial-gradient( circle at bottom right, #eee, #ccc 50px );
+.cercles {
+    width: 400px;
+    height: 250px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Dégradé ovale pour un œil */
+    background: radial-gradient(ellipse at center,
+        #fff 0%,         /* blanc (sclère) */
+        #fff 60%,
+        #6ab7ff 65%,     /* bleu clair (iris) */
+        #1976d2 75%,     /* bleu foncé (iris) */
+        #222 85%,        /* noir (pupille) */
+        #222 100%
+    );
+    box-shadow: 0 0 40px 10px #8888;
+    border-radius: 50% / 45%;
 }

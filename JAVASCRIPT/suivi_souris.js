@@ -1,7 +1,6 @@
 const btnStart = document.getElementById('start-gradient');
-const btnStop = document.getElementById('stop-gradient');
+const btnPlay = document.getElementById('play-btn');
 let tracking = false;
-
 
 // Position du coin bas droit au départ
 let currentX = window.innerWidth;
@@ -27,21 +26,20 @@ document.addEventListener('mousemove', function(e) {
 btnStart.addEventListener('click', function() {
     tracking = true;
     btnStart.style.display = 'none';
-    btnStop.style.display = 'inline';
-    // La cible devient la souris, mais currentX/Y restent en bas à droite
+    btnPlay.style.display = 'inline'; // Affiche le bouton JOUER
     targetX = lastMouseX;
     targetY = lastMouseY;
 });
 
-btnStop.addEventListener('click', function() {
-    tracking = false;
-    btnStart.style.display = 'inline';
-    btnStop.style.display = 'none';
-    // Ne change rien à currentX/currentY : le cercle reste où il est
+btnPlay.addEventListener('click', function() {
+    btnPlay.style.display = 'none';
+    // Charger dynamiquement play.js
+    const playScript = document.createElement('script');
+    playScript.src = 'JAVASCRIPT/play.js';
+    document.body.appendChild(playScript);
 });
 
 // Animation lissée
-
 function animate() {
     if (tracking) {
         // Mouvement lent (0.05 = très smooth)
@@ -55,7 +53,5 @@ function animate() {
     document.body.style.background = `repeating-radial-gradient(circle at ${xPercent}% ${yPercent}%, #eee, #ccc 50px)`;
     requestAnimationFrame(animate);
 }
-
-
 
 animate();
