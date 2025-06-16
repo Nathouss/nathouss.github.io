@@ -1,3 +1,7 @@
+.test {
+	color: red;
+	font-size: 2em;
+}
 .stripes {
 	background: repeating-radial-gradient( circle at bottom right, #eee, #ccc 50px );
 }
